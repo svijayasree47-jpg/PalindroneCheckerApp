@@ -6,17 +6,32 @@ public class PalindromeCheckerApp {
         System.out.println("Welcome to Palindrome Checker App Management System");
         System.out.println("Enter a string(lower case):");
         s=sc.nextLine();
-        String text="";
-        for(int i=s.length()-1; i>=0; i--){
-            text=text + s.charAt(i);
-        }
-        if (s.equals(text)) {
-            System.out.println("Palindrome");
-        } else {
-            System.out.println("Not a Palindrome");
+
+        char [] chars= s.toCharArray();
+
+        int start =0;
+        int end=chars.length - 1;
+
+        boolean isPalindrome=true;
+
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
         }
 
+        if(isPalindrome){
+            System.out.println("Palindrome");
+        }
+        else{
+            System.out.println("Is not a Palindrome");
+        }
         sc.close();
     }
 }
+
+
 
