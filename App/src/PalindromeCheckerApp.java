@@ -6,32 +6,30 @@ public class PalindromeCheckerApp {
         String s;
         System.out.println("Welcome to Palindrome Checker App Management System");
         System.out.println("Enter a string(lower case):");
-        s=sc.nextLine();
+        s = sc.nextLine();
 
-        LinkedList<Character> list = new LinkedList<>();
+        s = s.toLowerCase();
 
-        // Push each character of the string into the list
-        for (char c : s.toCharArray()) {
-            list.addLast(c);
-        }
+        boolean result = check(s, 0, s.length() - 1);
 
-        // Assume palindrome initially
-        boolean isPalindrome = true;
+        System.out.println("Is Palindrome?: " + result);
 
-        // Iterate again through original string
-        while (list.size() > 1) {
-            if (list.removeFirst() != list.removeLast()) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if(isPalindrome){
-            System.out.println("Palindrome");
-        }
-        else{
-            System.out.println("Is not a Palindrome");
-        }
         sc.close();
+    }
+
+    private static boolean check(String s, int start, int end) {
+
+        // Base case: pointers have crossed or met
+        if (start >= end) {
+            return true;
+        }
+
+        // If characters do not match
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call moving inward
+        return check(s, start + 1, end - 1);
     }
 }
