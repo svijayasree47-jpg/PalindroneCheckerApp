@@ -1,6 +1,5 @@
 import java.util.Scanner;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.LinkedList;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
@@ -9,20 +8,19 @@ public class PalindromeCheckerApp {
         System.out.println("Enter a string(lower case):");
         s=sc.nextLine();
 
-        Deque<Character> deque = new ArrayDeque<>();
+        LinkedList<Character> list = new LinkedList<>();
 
-        // Push each character of the string into the stack
+        // Push each character of the string into the list
         for (char c : s.toCharArray()) {
-            deque.addLast(c);
+            list.addLast(c);
         }
 
         // Assume palindrome initially
         boolean isPalindrome = true;
 
         // Iterate again through original string
-        while (deque.size() > 1) {
-            if (deque.removeFirst() != deque.removeLast()) {
-
+        while (list.size() > 1) {
+            if (list.removeFirst() != list.removeLast()) {
                 isPalindrome = false;
                 break;
             }
@@ -37,6 +35,3 @@ public class PalindromeCheckerApp {
         sc.close();
     }
 }
-
-
-
