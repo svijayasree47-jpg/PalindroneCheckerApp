@@ -9,21 +9,29 @@ public class PalindromeCheckerApp {
 
         s = s.toLowerCase();
 
-        boolean isPalindrome = true;
+        boolean result = PalindromeService.check(s);
 
-        for( int i=0; i<s.length()/2; i++){
-            if(s.charAt(i) != s.charAt(s.length()-1-i)) {
+        System.out.println("Is Palindrome?: " + result);
 
-                isPalindrome = false;
-                break;
-            }
-        }
-        if(isPalindrome){
-            System.out.println("Palindrome");
-        }
-        else{
-            System.out.println("Is not a Palindrome");
-        }
         sc.close();
+    }
+}
+
+class PalindromeService {
+    public static boolean check(String s) {
+
+        int start = 0;
+        int end = s.length() - 1;
+        // Base case: pointers have crossed or met
+        while (start < end) {
+            // If characters do not match
+            if (s.charAt(start) != s.charAt(end)) {
+                return false;
+            }
+            // Recursive call moving inward
+            start++;
+            end--;
+        }
+        return true;
     }
 }
