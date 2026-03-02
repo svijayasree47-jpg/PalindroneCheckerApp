@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
@@ -9,7 +10,9 @@ public class PalindromeCheckerApp {
 
         s = s.toLowerCase();
 
-        boolean result = PalindromeService.check(s);
+        PalindromeStrategy strategy = new StackStrategy();
+
+        boolean result = strategy.check(s);
 
         System.out.println("Is Palindrome?: " + result);
 
@@ -17,20 +20,24 @@ public class PalindromeCheckerApp {
     }
 }
 
-class PalindromeService {
-    public static boolean check(String s) {
+interface PalindromeStrategy{
+    boolean check(String s);
+}
 
-        int start = 0;
-        int end = s.length() - 1;
-        // Base case: pointers have crossed or met
-        while (start < end) {
-            // If characters do not match
-            if (s.charAt(start) != s.charAt(end)) {
+class StackStrategy implements PalindromeStrategy{
+    @Override
+    public boolean check(String s) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : s.toCharArray()) {
+            if (c != stack.pop()){
                 return false;
             }
-            // Recursive call moving inward
-            start++;
-            end--;
         }
         return true;
     }
